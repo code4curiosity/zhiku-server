@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccbjb.common.mapper.TPointsMapper" >
+  <resultMap id="BaseResultMap" type="com.ccbjb.common.domain.TPoints">
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="detail" property="detail" jdbcType="BLOB" />
+    <result column="p_order" property="pOrder" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="findAllPointsResultMap" type="TPoints" extends="BaseResultMap">
+    <collection property="items" javaType="com.ccbjb.common.domain.TPoints">
+      <id column="iid" property="id" jdbcType="BIGINT" />
+      <result column="ititle" property="title" jdbcType="VARCHAR" />
+      <result column="iorder" property="pOrder" jdbcType="INTEGER" />
+    </collection>
+  </resultMap>
+  <sql id="where_all">
+    <where>
+      <if test="findContent != null and findContent !='' " >
+        and (
+        LOWER(p.title) like  LOWER(CONCAT("%",#{findContent,jdbcType=VARCHAR},"%"))
+        )
+      </if>
+    </where>
+  </sql>
+  <select id="findAllPoints" resultMap="findAllPointsResultMap" >
+    select
+      p.id,p.title,p.p_order,i.id iid,i.title ititle,i.p_order iorder
+    from t_points p
+    left join t_points i
+              on p.id = i.parent_id
+    <where>
+      p.parent_id IS NULL
+      and p.type = #{type}
+      <if test="findContent != null and findContent !='' " >
+        and (
+        LOWER(p.title) like  LOWER(CONCAT("%",#{findContent,jdbcType=VARCHAR},"%"))
+        )
+      </if>
+    </where>
+    order by p.p_order, i.p_order
+  </select>
+  <select id="findPointById" resultMap="BaseResultMap" >
+    select
+    p.id, p.parent_id, p.title,p.detail,p.p_order,p.type
+    from t_points p where p.id = #{id} and p.type = #{type}
+  </select>
+  <select id="findParentPoints" resultMap="BaseResultMap" >
+    select
+    p.id,p.title,p.p_order
+    from t_points p where p.parent_id IS NULL and p.type = #{type} order by p.p_order
+  </select>
+</mapper>

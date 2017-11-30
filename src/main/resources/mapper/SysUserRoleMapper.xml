@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccbjb.common.mapper.SysUserRoleMapper">
+  <resultMap id="BaseResultMap" type="com.ccbjb.common.domain.SysUserRole">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="rid" jdbcType="BIGINT" property="rid" />
+  </resultMap>
+
+  <!-- 根据用户ID删除-->
+  <delete id="deleteByUserId">
+    delete from sys_user_role where uid =  #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteRoleByUserIds">
+    delete from sys_user_role where uid in(${userIds})
+  </delete>
+  <!-- 根据用户roleId查询用户ID -->
+  <select id="findUserIdByRoleId" resultType="long">
+    select uid from sys_user_role where rid =  #{id,jdbcType=BIGINT}
+  </select>
+
+</mapper>

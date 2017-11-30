@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccbjb.common.mapper.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.ccbjb.common.domain.SysUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="pswd" jdbcType="VARCHAR" property="pswd" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="status" jdbcType="BIGINT" property="status" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, nickname, email, pswd, create_time, last_login_time,status,salt
+  </sql>
+
+  <sql id="where_all">
+    <where>
+      <if test="findContent != null and findContent !='' " >
+        and (
+        LOWER(nickname) like  LOWER(CONCAT("%",#{findContent,jdbcType=VARCHAR},"%")) or
+        LOWER(email) like  LOWER(CONCAT("%",#{findContent,jdbcType=VARCHAR},"%"))
+        )
+      </if>
+    </where>
+  </sql>
+  <select id="findAllUsers" resultType="SysUser" >
+    select
+    <include refid="Base_Column_List" />
+    from sys_user
+    <include refid="where_all"/>
+  </select>
+
+
+  <!-- 用户权限分配的分页查询 -->
+  <select id="findUserAndRole" resultType="UserRoleAllocationModel">
+    select u.id,u.nickname,u.email,u.create_time,u.last_login_time,u.status,u.salt ,group_concat(ur.name) roleNames,group_concat(ur.id)roleIds from
+    sys_user u
+    left join sys_user_role uur on uur.uid = u.id
+    left join sys_role ur on ur.id = uur.rid
+    <where>
+      <if test="findContent != null and findContent !='' " >
+        and (
+        LOWER(u.nickname) like  LOWER(CONCAT("%",#{findContent,jdbcType=VARCHAR},"%")) or
+        LOWER(u.email) like  LOWER(CONCAT("%",#{findContent,jdbcType=VARCHAR},"%"))
+        )
+      </if>
+    </where>
+    group by u.id
+  </select>
+  <select id="selectRoleByUserId" resultType="SysRoleModel">
+    <!--
+  select ur.id,ur.name,ur.type,ifnull(uu.id,0)marker,uu.id userId from sys_role ur
+  left join sys_user_role uur on uur.rid = ur.id
+  left join (select id from sys_user where id =#{id,jdbcType=BIGINT}) uu on uu.id = uur.uid
+  group by ur.id
+     -->
+    select ur.id,ur.name,ur.type,ifnull(uur.uid,0) marker from sys_role ur
+    left join(select * from sys_user_role where uid=#{id,jdbcType=BIGINT}) uur on uur.rid = ur.id
+  </select>
+
+  <!-- 登录 -->
+  <select id="login" resultType="SysUser" >
+    select
+    <include refid="Base_Column_List" />
+    from sys_user
+    where email = #{email,jdbcType=VARCHAR} and pswd = #{pswd,jdbcType=VARCHAR}
+  </select>
+  <!-- 根据邮箱|帐号查询 -->
+  <select id="findUserByEmail" resultType="SysUser" >
+    select
+    <include refid="Base_Column_List" />
+    from sys_user
+    where email = #{email,jdbcType=VARCHAR}
+  </select>
+
+</mapper>

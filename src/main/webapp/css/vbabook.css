@@ -1,0 +1,319 @@
+.filter {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #222;
+    z-index: 1;
+    opacity: 0.5;
+    display: none;
+}
+.opts {
+    position: fixed;
+    top: 5%;
+    right: 10px;
+    z-index: 1;
+    font-size: 0;
+    width: 200px;
+}
+.opts .opt {
+    display: inline-block;
+    font-size: 40px;
+    margin-left: 10px;
+    margin-top: 10px;
+    background: #ffcd32;
+    color: #FFF;
+    border: 1px solid #FFF;
+    border-radius: 50%;
+    opacity: 0.5;
+    cursor: pointer;
+}
+@media screen and (max-width: 768px)  {
+    .opts {
+        width: 50px;
+    }
+}
+.opts .opt:hover {
+    background: rgba(255, 205, 49, 0.5);
+}
+.bg-image {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    display: none;
+    text-align: center;
+}
+.big-image {
+    position: absolute;
+    width: 80%;
+    vertical-align: middle;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+}
+.t-h1 {
+    font-weight: bold;
+    font-size: 22px;
+    text-shadow:2px 2px 5px #fff;
+}
+.t-h2 {
+    font-weight: bold;
+    font-size: 18px;
+    text-shadow:2px 2px 4px #fff;
+}
+.t-h3 {
+    font-weight: bold;
+    font-size: 16px;
+    text-shadow:1px 1px 2px #fff;
+    min-width: 50px;
+    margin-right: 5px;
+}
+.wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.container {
+    /*color: #f54785*/
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 20px 0
+}
+.content-background {
+    background: #333;
+    border-radius: 5px;
+    margin-top: 20px;
+    position: relative;
+    padding: 20px 10px;
+    width: 100%;
+    box-shadow: 0px 10px 15px -12px #fff;
+    box-sizing: border-box;
+}
+.content—body {
+    margin-top: 10px;
+    line-height: 25px;
+    position: relative;
+}
+.code .copycode {
+    position : absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+@media screen and (max-width: 768px){
+    .code .copycode {
+        position : static;
+    }
+}
+.code .copycode:hover {
+    background: rgba(255, 205, 49, 0.5);
+}
+
+.btn {
+    border: none !important;
+    display: inline-block;
+    background: #ffcd32;
+    padding: 10px 20px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 10px;
+    transition: 0.5s;
+    text-align: center;
+}
+@media screen and (max-width: 768px) {
+    .copycode {
+        padding: 5px 10px;
+    }
+}
+.title {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+.title .tips-no {
+    flex: 0 0 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.title .text {
+    padding-left: 10px;
+    flex: 1;
+}
+.func {
+    margin-top: 10px;
+}
+.func-title .text {
+    display: inline;
+}
+
+.diagram .content—body {
+    display: flex;
+}
+@media screen and (max-width: 768px) {
+    .diagram .content—body {
+        display: flex;
+        flex-direction: column;
+    }
+}
+.diagram .content—body .diagram-before {
+    flex: 1;
+}
+.diagram .image-wrapper {
+    padding: 10px
+}
+.diagram .content—body .diagram-after {
+    flex: 1;
+}
+.diagram .img-opt {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.notice-title {
+    position: relative;
+    min-height: 36px;
+    line-height: 36px;
+    width: 100%;
+    background: #444;
+    box-shadow: 0px 10px 15px -12px #fff;
+}
+.notice-title .notice-text {
+    display: inline-block;
+    padding-left: 20px;
+    font-size: 16px;
+    font-weight: 400;
+}
+.notice-title .notice-text .tips{
+    position: absolute;
+    top: 0;
+    height: 36px;
+    padding: 0 20px;
+    line-height: 36px;
+    background: #333;
+}
+.notice-title .notice-text .content{
+    padding-left: 108px;
+    font-weight: bold;
+}
+.linenums {
+    user-select: text;
+    line-height: 18px;
+}
+.linenums li {
+    list-style-type: decimal !important;
+}
+.explain-table {
+    margin-top: 10px;
+}
+.explain-table .explain-title span {
+    padding-left: 10px;
+    font-weight: bold;
+}
+.explain-table table {
+    margin-top: 10px;
+    background: #444;
+    text-align: left;
+    border: 1px solid #F1F1F1;
+    border-radius:1px; /*圆角设置属性*/
+    overflow:hidden;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    border-bottom-right-radius:5px;
+    border-bottom-left-radius:5px;
+}
+
+.explain-table table tr th,table tr td {
+    border-right: 1px solid #d4d8da;
+    border-bottom: 1px solid #d4d8da;
+    padding: 5px;
+}
+
+.explain-table table th{
+    background: #ffcd32;
+    color: #fff;
+    padding: 10px;
+    min-width: 100px;
+}
+
+.explain-table table td{
+    margin: 1px;
+    background: #444;
+    padding: 10px;
+}
+.gototop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+}
+.gototop.active {
+    opacity: 1;
+    visibility: visible;
+}
+.gototop a {
+    width: 50px;
+    height: 50px;
+    display: table;
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffcd32;
+    text-align: center;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+}
+.gototop a i {
+    height: 50px;
+    display: table-cell;
+    vertical-align: middle;
+}
+.gototop a:hover, .gototop a:active, .gototop a:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+.catalogue {
+    text-align: left;
+    line-height: 35px;
+    max-width: 768px;
+    margin: 0 auto;
+}
+.catalogue .catalogue-item:hover {
+    cursor: pointer;
+}
+
+.func-order {
+    background: #444;
+    padding: 20px 10px;
+    border-radius: 5px;
+}
+.func-order .func-name {
+    line-height: 20px;
+}
+.func-order .func-code {
+    line-height: 20px;
+    font-size: 13px;
+}
+.func-order .dot {
+    display: inline-block;
+    margin: 5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ffcd32;
+}

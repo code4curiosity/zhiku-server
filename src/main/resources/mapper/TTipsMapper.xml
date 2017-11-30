@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccbjb.common.mapper.TTipsMapper" >
+    <resultMap id="BaseResultMap" type="com.ccbjb.common.domain.TTips">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="tips_no" property="tipsNo" jdbcType="BIGINT"/>
+        <result column="tips_title" property="tipsTitle" jdbcType="VARCHAR"/>
+        <result column="func_title" property="funcTitle" jdbcType="VARCHAR"/>
+        <result column="func_desc" property="funcDesc" jdbcType="VARCHAR"/>
+        <result column="tips_code" property="tipsCode" jdbcType="VARCHAR"/>
+        <result column="tips_explain" property="tipsExplain" jdbcType="VARCHAR"/>
+        <result column="explain_table" property="explainTable" jdbcType="VARCHAR"/>
+        <result column="img_before" property="imgBefore" jdbcType="VARCHAR"/>
+        <result column="img_after" property="imgAfter" jdbcType="VARCHAR"/>
+        <result column="notice_title" property="noticeTitle" jdbcType="VARCHAR"/>
+        <result column="notice_content" property="noticeContent" jdbcType="VARCHAR"/>
+        <result column="notice_code" property="noticeCode" jdbcType="VARCHAR"/>
+        <result column="img_before_desc" property="imgBeforeDesc" jdbcType="VARCHAR"/>
+        <result column="img_after_desc" property="imgAfterDesc" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="findAllTipsResultMap" type="com.ccbjb.common.domain.TTips" extends="BaseResultMap">
+        <collection property="tipsFuncList" javaType="com.ccbjb.common.domain.TTipsFunc">
+            <id column="fid" property="id" jdbcType="BIGINT" />
+            <result column="tips_id" property="tipsId" jdbcType="BIGINT" />
+            <result column="func_name" property="funcName" jdbcType="VARCHAR"/>
+            <result column="func_code" property="funcCode" jdbcType="VARCHAR"/>
+            <result column="f_createTime" property="create_time" jdbcType="TIMESTAMP"/>
+            <result column="f_updateTime" property="update_time" jdbcType="TIMESTAMP"/>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+        t.id,t.parent_id,t.tips_no,t.tips_title,t.func_title,t.func_desc,t.tips_code,t.tips_explain,t.explain_table,t.img_before,t.img_after,
+        t.notice_title,t.notice_content,t.notice_code,t.img_before_desc,t.img_after_desc,t.create_time,t.update_time,
+        f.id as fid,f.tips_id,f.func_name,f.func_code,f.create_time as f_create_time,f.update_time as f_update_time
+    </sql>
+    <select id="selectTipsByTipsNo" resultMap="findAllTipsResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_tips t
+        left join t_tips_func f
+          ON t.id = f.tips_id
+        <where>
+            <if test="tipsNo != null and tipsNo != 0">
+                and t.tips_no = #{tipsNo}
+            </if>
+            <if test="findContent != null and findContent !='' " >
+                and (
+                LOWER(t.tips_no) like CONCAT("%",#{findContent,jdbcType=VARCHAR},"%") or
+                LOWER(t.tips_title) like CONCAT("%",#{findContent,jdbcType=VARCHAR},"%")
+                )
+            </if>
+        </where>
+        order by t.tips_no
+    </select>
+</mapper>

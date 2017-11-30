@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccbjb.common.mapper.SysPermissionMapper">
+  <resultMap id="BaseResultMap" type="com.ccbjb.common.domain.SysPermission">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, url, name
+  </sql>
+
+  <sql id="where_all">
+    <where>
+      <if test="findContent != null and findContent !='' " >
+        and (
+        LOWER(name) like CONCAT("%",#{findContent,jdbcType=VARCHAR},"%") or
+        LOWER(url) like CONCAT("%",#{findContent,jdbcType=VARCHAR},"%")
+        )
+      </if>
+    </where>
+  </sql>
+  <select id="findAllPermissions" resultType="SysPermission" >
+    select
+    <include refid="Base_Column_List" />
+    from sys_permission
+    <include refid="where_all"/>
+  </select>
+  <!-- 根据角色获取权限，marker:0,没有权限，marker：非0(和up.id)一致表示有权限。
+  	com.sojson.permission.bo.UPermissionBo中的这个方法是校验权限
+  	public boolean isCheck(){
+		return StringUtils.equals(roleId,marker);
+	}
+  -->
+  <select id="selectPermissionById" resultType="SysPermissionModel">
+    select up.id,ur.id roleId,up.name,up.url,min(ifnull(ur.id,0))marker from sys_permission up
+    left join sys_role_permission urp on urp.pid = up.id
+    left join (select id from sys_role where id = #{id,jdbcType=BIGINT}) ur on ur.id = urp.rid
+    group by up.id
+  </select>
+  <!-- 根据用ID查询permission -->
+  <select id="findPermissionByUserId" resultType="java.lang.String">
+    select p.url from sys_permission p , sys_role_permission rp, sys_user_role ur
+    where uid =#{id,jdbcType=BIGINT} and p.id = rp.pid and rp.rid = ur.rid
+  </select>
+
+</mapper>
