@@ -6,6 +6,17 @@
          metadata-complete="true">
 <!-- maven创建的servlet版本需要从tomcat里面取最新的覆盖掉 -->
 
+    <filter>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
 	<!-- 若有过滤器则需此配置 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -15,7 +26,7 @@
 			classpath*:spring/spring-shiro.xml
 		</param-value>
 	</context-param>
-	
+
     <!-- post乱码处理 -->
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>

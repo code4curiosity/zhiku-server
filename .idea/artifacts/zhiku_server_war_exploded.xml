@@ -78,8 +78,10 @@
           <element id="library" level="project" name="Maven: org.mongodb:mongodb-driver:3.5.0" />
           <element id="library" level="project" name="Maven: org.mongodb:bson:3.5.0" />
           <element id="library" level="project" name="Maven: org.mongodb:mongodb-driver-core:3.5.0" />
+          <element id="library" level="project" name="Maven: org.tuckey:urlrewritefilter:4.0.3" />
         </element>
       </element>
+      <element id="library" level="project" name="Maven: commons-codec:commons-codec:unknown" />
       <element id="javaee-facet-resources" facet="zhiku-server/web/Web" />
     </root>
   </artifact>

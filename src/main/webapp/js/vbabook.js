@@ -23,7 +23,8 @@ function banBack() {
 }
 function loadPage(tipsNo, isLeft) {
     // window.location.href = "http://localhost:8080/ebook/vbabook.tkm?tipsNo=" + tipsNo
-    var url = "http://localhost:8080/ebook/vbabook.tkm?tipsNo=" + tipsNo
+    // var url = "http://localhost:8080/ebook/vbabook.tkm?tipsNo=" + tipsNo
+    var url = "/vbabook/" + tipsNo + '.html'
     $.ajax({
       url : url,
       type : "GET",
@@ -50,7 +51,6 @@ function loadPage(tipsNo, isLeft) {
 }
 function init() {
     // 代码格式
-    console.log()
     $('pre code').each(function(i, block) {
         hljs.highlightBlock(block);
     });
@@ -129,44 +129,47 @@ function init() {
     $(".wrapper").on('touchmove', function (e) {
         var _touch = e.originalEvent.targetTouches[0];
         var delta = _touch.pageX - touch.startX
-        if(delta < 0) {
-            if(Math.abs(delta) > Math.abs(window.innerWidth * 0.15)) {
+        touch.delta = delta
+    })
+    $(".wrapper").on('touchend', function (e) {
+        if(touch.delta < 0) {
+            if(Math.abs(touch.delta) > Math.abs(window.innerWidth * 0.15)) {
                 var tipsNo = parseInt($(this).data("no")) + 1
                 if (tipsNo > 620) {
+                    layer.msg('已经是最后一页啦！');
                     return;
                 }
                 loadPage(tipsNo, true)
             }
-        }else if(delta > 0) {
-            if(Math.abs(delta) > Math.abs(window.innerWidth * 0.15)) {
+        }else if(touch.delta > 0) {
+            if(Math.abs(touch.delta) > Math.abs(window.innerWidth * 0.15)) {
                 var tipsNo = parseInt($(this).data("no")) - 1
-                if(tipsNo < 0) {
+                if(tipsNo < 1) {
+                    layer.msg('没有前一页啦！');
                     return;
                 }
                 loadPage(tipsNo)
             }
         }
-
-    })
-    $(".wrapper").on('touchend', function (e) {
-
     })
     $(".opts .opt-right").click(function() {
         var tipsNo = parseInt($(this).data("no")) + 1
         if (tipsNo > 620) {
+            layer.msg('已经是最后一页啦！');
             return;
         }
         loadPage(tipsNo, true)
     })
     $(".opts .opt-left").click(function() {
         var tipsNo = parseInt($(this).data("no")) - 1
-        if(tipsNo < 0) {
+        if(tipsNo < 1) {
+            layer.msg('没有前一页啦！');
             return;
         }
         loadPage(tipsNo)
     })
     $(".opts .catalogue").click(function () {
-        window.location.href = '/ebook/catalogue.tkm'
+        window.location.href = '/catalogue/1.html'
     })
 
     banBack()

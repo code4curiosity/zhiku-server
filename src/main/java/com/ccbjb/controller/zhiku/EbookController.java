@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,8 +35,11 @@ public class EbookController extends BaseController{
     }
 
     @RequestMapping(value="catalogue")
-    public ModelAndView catalogue() {
-        return new ModelAndView("catalogue", "result", iTipsService.findCatalogue());
+    public ModelAndView catalogue(String findContent, @RequestParam(value="pageNo", defaultValue="1") Integer pageNo) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("findContent", findContent);
+        Result result = iTipsService.findCatalogue(map,pageNo,20);
+        return new ModelAndView("catalogue", "result", result);
     }
 
     @RequestMapping(value="list")

@@ -79,8 +79,12 @@ public class TipsServiceImpl implements ITipsService {
     }
 
     @Override
-    public Result findCatalogue() {
-        return ResultGenerator.genSuccessResult(tTipsDao.findAll());
+    public Result findCatalogue(Map<String,String> map, Integer pageNo,
+                                Integer pageSize) {
+        PageHelper.startPage(pageNo, pageSize);
+        List<TTips> list = tTipsDao.findAll();
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
     }
 
     @SuppressWarnings("unchecked")

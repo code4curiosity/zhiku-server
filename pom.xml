@@ -276,5 +276,11 @@
       <artifactId>mongodb-driver</artifactId>
       <version>3.5.0</version>
     </dependency>
+    <!-- jsp静态化 -->
+    <dependency>
+      <groupId>org.tuckey</groupId>
+      <artifactId>urlrewritefilter</artifactId>
+      <version>4.0.3</version>
+    </dependency>
   </dependencies>
 </project>
