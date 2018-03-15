@@ -37,4 +37,11 @@ public class TPointsDaoImpl extends AbstractDao<TPoints> implements TPointsDao {
     public List<TPoints> findParentPoints(int type){
         return tPointsMapper.findParentPoints(type);
     }
+
+    @Override
+    public int findHasChildPoint(Long id) {
+        return tPointsMapper.findHasChildPoint(id);
+    }
+
+
 }

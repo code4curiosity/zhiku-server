@@ -16,31 +16,33 @@
     <link rel="stylesheet" href="${baseurl}/css/icomoon.css">
 </head>
 <body>
-    <div class="opts">
-        <c:if test="${result.data.pageNum > 1}">
-            <div class="opt opt-left operator" data-no="${result.data.pageNum}">
-                <i class="icon-chevron-left"></i>
-            </div>
-        </c:if>
-        <c:if test="${result.data.pageNum < result.data.pages}">
-            <div class="opt opt-right operator" data-no="${result.data.pageNum}" data-size="${result.data.pages}">
-                <i class="icon-chevron-right"></i>
-            </div>
-        </c:if>
-    </div>
-    <div class="wrapper"  data-no="${result.data.pageNum}" data-size="${result.data.pages}" >
-        <div class="container">
-            <div class="catalogue">
-                <h1 class="text t-h1">目录</h1>
-                <c:forEach items="${result.data.list}" var="it">
-                    <div><p class="catalogue-item" data-no="${it.tipsNo}">${it.tipsNo}--${it.tipsTitle}</p></div>
-                </c:forEach>
-            </div>
-            <div class="pagination">--第${result.data.pageNum}页--</div>
+    <div class="muses">
+        <div class="opts">
+            <c:if test="${result.data.pageNum > 1}">
+                <div class="opt opt-left operator" data-no="${result.data.pageNum}">
+                    <i class="icon-chevron-left"></i>
+                </div>
+            </c:if>
+            <c:if test="${result.data.pageNum < result.data.pages}">
+                <div class="opt opt-right operator" data-no="${result.data.pageNum}" data-size="${result.data.pages}">
+                    <i class="icon-chevron-right"></i>
+                </div>
+            </c:if>
         </div>
-    </div>
-    <div class="gototop js-top">
-        <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+        <div class="wrapper"  data-no="${result.data.pageNum}" data-size="${result.data.pages}" >
+            <div class="container">
+                <div class="catalogue">
+                    <h1 class="text t-h1">目录</h1>
+                    <c:forEach items="${result.data.list}" var="it">
+                        <div><p class="catalogue-item" data-no="${it.tipsNo}">${it.tipsNo}--${it.tipsTitle}</p></div>
+                    </c:forEach>
+                </div>
+                <div class="pagination">--第${result.data.pageNum}页--</div>
+            </div>
+        </div>
+        <div class="gototop js-top">
+            <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+        </div>
     </div>
 </body>
 <script src="${baseurl}/js/jquery.min.js"></script>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration scan="true" scanPeriod="60 seconds" debug="false">
+<configuration scan="true" scanPeriod="60 seconds" debug="true">
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoding>UTF-8</encoding>
         <encoder>
@@ -14,7 +14,8 @@
         <File>d:/zhikulog/zhiku.log</File>
         <!--<File>/developer/apache-tomcat-7.0.65/logs/zhiku.log</File>-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/developer/apache-tomcat-7.0.65/logs/zhiku.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <!--<fileNamePattern>/developer/apache-tomcat-7.0.65/logs/zhiku.log.%d{yyyy-MM-dd}.gz</fileNamePattern>-->
+            <fileNamePattern>d:/zhikulog/zhiku.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
             <append>true</append>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
@@ -52,7 +53,7 @@
 
     <!-- geelynote mybatis log 日志 -->
 
-    <logger name="com.ccbjb.dao" level="DEBUG"/>
+    <logger name="com.ccbjb.common.mapper" level="DEBUG"/>
 
     <!--<logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG" >-->
     <!--<appender-ref ref="console"/>-->

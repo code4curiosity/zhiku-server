@@ -22,6 +22,8 @@ public interface IPointsService {
 	Result findPage(Map<String, String> resultMap, Integer pageNo,
                     Integer pageSize);
 
+	Result findAllPage(Map<String, String> resultMap, Integer pageSize);
+
 	Result deletePointByIds(Long[] ids);
 
 	Result selectParentPoints(int type);

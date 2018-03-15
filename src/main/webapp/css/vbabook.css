@@ -58,17 +58,14 @@
 .t-h1 {
     font-weight: bold;
     font-size: 22px;
-    text-shadow:2px 2px 5px #fff;
 }
 .t-h2 {
     font-weight: bold;
     font-size: 18px;
-    text-shadow:2px 2px 4px #fff;
 }
 .t-h3 {
     font-weight: bold;
     font-size: 16px;
-    text-shadow:1px 1px 2px #fff;
     min-width: 50px;
     margin-right: 5px;
 }
@@ -83,7 +80,7 @@
     /*color: #f54785*/
     max-width: 1024px;
     margin: 0 auto;
-    padding: 20px 0
+    padding: 20px 20px;
 }
 .content-background {
     background: #333;

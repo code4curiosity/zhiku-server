@@ -15,5 +15,5 @@ public interface TPointsDao extends BaseDao<TPoints> {
     List<TPoints> findAllPoints(Map<String, String> map);
     TPoints findPointById(Long id,int type);
     List<TPoints> findParentPoints(int type);
-
+    int findHasChildPoint(Long id);
 }

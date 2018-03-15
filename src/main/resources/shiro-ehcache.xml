@@ -1,8 +1,8 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="../config/ehcache.xsd">
-	<!--diskStore：缓存数据持久化的目录 地址D:\develop\ehcache  /Applications/ehcache  -->
-	<diskStore path="D:\develop\ehcache" />
-	<defaultCache 
+	<!--diskStore：缓存数据持久化的目录 地址D:\develop\ehcache  /home/ehcache  -->
+	<diskStore path="/home/ehcache" />
+	<defaultCache
 		maxElementsInMemory="1000" 
 		maxElementsOnDisk="10000000"
 		eternal="false" 

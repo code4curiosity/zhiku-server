@@ -34,6 +34,13 @@ public class PointsController extends BaseController {
         return pointsService.findPage(map,pageNo,pageSize);
     }
 
+    @RequestMapping("listAll")
+    public Result listAll(String type) {
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("type", type);
+        return pointsService.findAllPage(map,pageSize);
+    }
+
     /**
      * 角色添加
      * @param point

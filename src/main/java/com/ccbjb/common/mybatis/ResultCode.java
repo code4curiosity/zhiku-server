@@ -17,6 +17,7 @@ public enum ResultCode {
     ERR_110(110, "帐号|Email已经存在！"),
     ERR_111(111, "存在多个当前tips"),
     ERR_112(112, "不存在的tips"),
+    ERR_113(113, "存在子节点的Tip不能删除！"),
     FAIL(400, "失败"),
     UNAUTHORIZED(401, "未认证（签名错误）"),
     NOT_FOUND(404, "接口不存在"),

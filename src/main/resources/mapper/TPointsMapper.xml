@@ -52,4 +52,7 @@
     p.id,p.title,p.p_order
     from t_points p where p.parent_id IS NULL and p.type = #{type} order by p.p_order
   </select>
+  <select id="findHasChildPoint" resultType="int" parameterType="long">
+    select count(1) from t_points where parent_id = #{id}
+  </select>
 </mapper>

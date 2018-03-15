@@ -3,6 +3,7 @@ package com.ccbjb.service.points.impl;
 import com.ccbjb.common.domain.TCuts;
 import com.ccbjb.common.domain.TPoints;
 import com.ccbjb.common.mybatis.Result;
+import com.ccbjb.common.mybatis.ResultCode;
 import com.ccbjb.common.mybatis.ResultGenerator;
 import com.ccbjb.common.utils.LoggerUtils;
 import com.ccbjb.common.utils.StringUtils;
@@ -89,6 +90,13 @@ public class PointServiceImpl implements IPointsService {
 
 	@Transactional
 	@Override
+	public Result findAllPage(Map<String, String> resultMap, Integer pageSize) {
+		List<TPoints> list = tPointsDao.findAllPoints(resultMap);
+		return ResultGenerator.genSuccessResult(list);
+	}
+
+	@Transactional
+	@Override
 	public Result selectPoint(Long id,int type) {
 		TPoints point = tPointsDao.findPointById(id,type);
 		TPointsModel model = new TPointsModel();
@@ -120,6 +128,9 @@ public class PointServiceImpl implements IPointsService {
 			String resultMsg = "";
 
 			for (Long id : ids) {
+				if (tPointsDao.findHasChildPoint(id) > 0) {
+					return ResultGenerator.genFailResult(ResultCode.ERR_113);
+				}
 				this.deletePointById(id);
 				count++;
 			}
