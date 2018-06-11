@@ -33,19 +33,14 @@
                 /js/** = anon
                 /fonts/** = anon
                 /css/** = anon
-                /admin/images/** = anon
-                /admin/js/** = anon
-                /admin/fonts/** = anon
-                /admin/css/** = anon
+                /admin/** = anon
 
                 /api/** = anon
                 /points/** = anon
                 /tips/** = anon
                 <!-- 入口html匿名访问 -->
                 /index.html = anon
-                /admin/index.html = anon
                 / = anon
-                /admin/ = anon
                 /favicon.ico = anon
 
                 <!-- 请求 logout.action地址，shiro去清除session-->

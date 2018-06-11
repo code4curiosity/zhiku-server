@@ -1,5 +1,6 @@
 package com.ccbjb.controller.user;
 
+import com.ccbjb.common.domain.SysRole;
 import com.ccbjb.common.domain.SysUser;
 import com.ccbjb.common.mybatis.Result;
 import com.ccbjb.common.mybatis.ResultCode;
@@ -8,15 +9,19 @@ import com.ccbjb.common.shiro.TokenManager;
 import com.ccbjb.common.shiro.VerifyCodeUtils;
 import com.ccbjb.common.utils.LoggerUtils;
 import com.ccbjb.controller.common.BaseController;
+import com.ccbjb.service.permission.IRoleService;
 import com.ccbjb.service.user.IUserService;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 登陆和退出
@@ -24,20 +29,23 @@ import javax.servlet.http.HttpServletRequest;
  * @since 1.0
  * @author CJB-国内开发组
  */
-@RestController
+@Controller
 @Scope(value="prototype")
 @RequestMapping("user")
 public class LoginController extends BaseController{
 
 	@Autowired
     IUserService userService;
+	@Autowired
+	IRoleService roleService;
 	/**
 	 * 登录跳转
 	 * @return
 	 */
 	@RequestMapping(value="login")
-	public Result login(HttpServletRequest request){
-		return ResultGenerator.genFailResult(ResultCode.RE_LOGIN);
+	public String login(HttpServletRequest request){
+//		return ResultGenerator.genFailResult(ResultCode.RE_LOGIN);
+		return "login";
 	}
 
 	/**
@@ -45,19 +53,22 @@ public class LoginController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value="refuse")
+	@ResponseBody
 	public Result refuse(HttpServletRequest request){
 		return ResultGenerator.genFailResult(ResultCode.RE_LOGIN);
 	}
 
 	//登陆提交地址，和applicationContext-shiro.xml中配置的loginurl一致
 	@PostMapping(value="submitLogin")
+	@ResponseBody
 	public Result submitLogin(SysUser sysUser, Boolean rememberMe, HttpServletRequest request)throws Exception{
 		Result result = null;
 		try {
 			sysUser = TokenManager.login(sysUser.getEmail(),sysUser.getPswd(),rememberMe);
 
 			//跳转地址
-			result = ResultGenerator.genSuccessResult("登录成功");
+			List<SysRole> roles = roleService.findNowAllPermission();
+			result = ResultGenerator.genSuccessResult(roles);
 			/**
 			 * 这里其实可以直接catch Exception，然后抛出 message即可，但是最好还是各种明细catch 好点。。
 			 */
@@ -77,6 +88,7 @@ public class LoginController extends BaseController{
 	 * @return
 	 */
 	@PostMapping(value="subRegister")
+	@ResponseBody
 	public Result subRegister(String vcode, SysUser entity){
 		Result result = null;
 		if(!VerifyCodeUtils.verifyCode(vcode)){

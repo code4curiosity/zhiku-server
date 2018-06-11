@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccbjb.common.mapper.TZhikuInfoMapper" >
+    <resultMap id="BaseResultMap" type="com.ccbjb.common.domain.TZhikuInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="category_id" property="categoryId" jdbcType="BIGINT"/>
+        <result column="info_title" property="infoTitle" jdbcType="VARCHAR"/>
+        <result column="info_order" property="infoOrder" jdbcType="VARCHAR"/>
+        <result column="info_content" property="infoContent" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="findAllInfosResultMap" type="TZhikuInfo" extends="BaseResultMap">
+        <collection property="infoItems" javaType="TZhikuInfo">
+            <id column="id_s" property="id" jdbcType="BIGINT" />
+            <result column="parent_id_s" property="parentId" jdbcType="BIGINT"/>
+            <result column="category_id_s" property="categoryId" jdbcType="BIGINT"/>
+            <result column="info_title_s" property="infoTitle" jdbcType="VARCHAR"/>
+            <result column="info_order_s" property="infoOrder" jdbcType="VARCHAR"/>
+            <result column="info_content_s" property="infoContent" jdbcType="VARCHAR"/>
+            <result column="create_time_s" property="createTime" jdbcType="TIMESTAMP"/>
+            <result column="update_time_s" property="updateTime" jdbcType="TIMESTAMP"/>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+        p.id,p.parent_id,p.category_id,p.info_title,p.info_order,p.info_content,p.create_time,p.update_time,
+        s.id as id_s,s.parent_id as parent_id_s,s.category_id as category_id_s,s.info_title as info_title_s,s.info_order as info_order_s,s.info_content as info_content_s,s.create_time as create_time_s,s.update_time as update_time_s
+    </sql>
+    <select id="selectInfoByInfoNo" resultMap="findAllInfosResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_zhiku_info p
+        left join t_zhiku_info s
+          on p.id = s.parent_id
+        <where>
+            p.category_id = #{categoryId}
+            <if test="findContent != null and findContent !='' " >
+                and (
+                LOWER(p.info_title) like CONCAT("%",#{findContent,jdbcType=VARCHAR},"%")
+                )
+            </if>
+            and p.parent_id IS NULL
+        </where>
+        order by p.info_order,p.id
+    </select>
+    <select id="findInfoParents" resultType="TZhikuInfo">
+        select p.id,p.parent_id,p.category_id,p.info_title,p.info_order,p.info_content,p.create_time,p.update_time
+        FROM t_zhiku_info p
+        where
+        p.category_id = #{categoryId} and
+        p.parent_id  IS NULL
+    </select>
+    <select id="findInfoItems" resultType="TZhikuInfo">
+        select p.id,p.parent_id,p.category_id,p.info_title,p.info_order,p.info_content,p.create_time,p.update_time
+        FROM t_zhiku_info p
+        where
+        p.parent_id = #{parentId}
+    </select>
+</mapper>

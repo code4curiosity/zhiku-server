@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccbjb.common.mapper.TZhikuCategoryMapper">
+    <resultMap id="BaseResultMap" type="TZhikuCategory">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="category_value" property="categoryValue" jdbcType="VARCHAR" />
+        <result column="category_label" property="categoryLabel" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="img_path" property="imgPath" jdbcType="VARCHAR" />
+        <result column="source_type" property="sourceType" jdbcType="VARCHAR" />
+        <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="findAllCategoryResultMap" type="TZhikuCategory" extends="BaseResultMap">
+        <collection property="categoryItems" javaType="TZhikuCategory">
+            <id column="id_s" property="id" jdbcType="BIGINT" />
+            <result column="category_value_s" property="categoryValue" jdbcType="VARCHAR" />
+            <result column="category_label_s" property="categoryLabel" jdbcType="VARCHAR" />
+            <result column="description_s" property="description" jdbcType="VARCHAR" />
+            <result column="img_path_s" property="imgPath" jdbcType="VARCHAR" />
+            <result column="source_type_s" property="sourceType" jdbcType="VARCHAR" />
+            <result column="parent_id_s" property="parentId" jdbcType="BIGINT" />
+            <result column="create_time_s" property="createTime" jdbcType="TIMESTAMP"/>
+            <result column="update_time_s" property="updateTime" jdbcType="TIMESTAMP"/>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,
+        category_value,
+        category_label,
+        parent_id,
+        description,
+        img_path,
+        source_type,
+        create_time,
+        update_time
+    </sql>
+
+    <sql id="where_all">
+        <where>
+            <if test="findContent != null and findContent !='' " >
+                and (
+                LOWER(p.category_value) like CONCAT("%",#{findContent,jdbcType=VARCHAR},"%") or
+                LOWER(p.category_label) like CONCAT("%",#{findContent,jdbcType=VARCHAR},"%")
+                )
+            </if>
+            and p.parent_id IS NULL
+        </where>
+    </sql>
+    <select id="findAllCategories" resultMap="findAllCategoryResultMap">
+        select
+        p.id,
+        p.category_value,
+        p.category_label,
+        p.description,
+        p.img_path,
+        p.source_type,
+        p.parent_id,
+        p.create_time,
+        p.update_time,
+        s.id as id_s,
+        s.category_value as category_value_s,
+        s.category_label as category_label_s,
+        s.description as description_s,
+        s.img_path as img_path_s,
+        s.source_type as source_type_s,
+        s.parent_id as parent_id_s,
+        s.create_time as create_time_s,
+        s.update_time as update_time_s
+        from t_zhiku_category p
+          left join t_zhiku_category s
+            on p.id = s.parent_id
+        <include refid="where_all"/>
+        order by id
+    </select>
+
+    <select id="findCategoryParents" resultType="TZhikuCategory">
+        select p.id, p.category_value,p.category_label,p.description,p.img_path,p.source_type,p.parent_id,p.create_time,p.update_time
+        FROM t_zhiku_category p
+		where
+			p.parent_id  IS NULL
+    </select>
+    <select id="findCategoryItems" resultType="TZhikuCategory">
+        select
+        id,
+        category_value,
+        category_label,
+        description,
+        img_path,
+        source_type,
+        parent_id,
+        create_time,
+        update_time
+        FROM t_zhiku_category
+        where
+        parent_id = #{parentId}
+    </select>
+</mapper>
