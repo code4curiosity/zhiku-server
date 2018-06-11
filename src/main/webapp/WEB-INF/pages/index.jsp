@@ -21,7 +21,7 @@
 						<div class="display-tc animate-box" data-animate-effect="fadeIn">
 							<h1>长春对日服务外包智库<br />公共平台</h1>
 							<h2>技术/翻译支持by- <a href="http://www.ccbjb.com.cn/" target="_blank" title="长春必捷必">CCBJB</a></h2>
-							<p><a class="btn btn-primary btn-lg btn-learn" href="ebook.jsp">获取课程</a></p>
+							<p><a class="btn btn-primary btn-lg btn-learn" href="/zhiku/ebook.tkm">获取课程</a></p>
 						</div>
 					</div>
 				</div>
@@ -76,7 +76,7 @@
 								<li><i class="icon-check2"></i>大型流通行业</li>
 								<li><i class="icon-check2"></i>金融行业和公共事业行业</li>
 							</ul>
-							<p><a class="btn btn-primary btn-lg popup-vimeo btn-video" href="ebook.jsp">获取课程</a></p>
+							<p><a class="btn btn-primary btn-lg popup-vimeo btn-video" href="/upload/video/4-6.mp4">获取课程</a></p>
 						</div>
 					</div>
 				</div>
@@ -122,37 +122,37 @@
 		<div class="container-fluid proj-bottom">
 			<div class="row">
 				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
-					<a href="#"><img src="${baseurl}/images/project-1.jpg" alt="Web网站开发" class="img-responsive">
+					<a href="/zhiku/training.tkm"><img src="${baseurl}/images/project-1.jpg" alt="Web网站开发" class="img-responsive">
 						<h3>Web网站开发</h3>
 						<span>观看课程</span>
 					</a>
 				</div>
 				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
-					<a href="#"><img src="${baseurl}/images/project-2.jpg" alt="对日软件开发流程" class="img-responsive">
+					<a href="/zhiku/training.tkm"><img src="${baseurl}/images/project-2.jpg" alt="对日软件开发流程" class="img-responsive">
 						<h3>对日软件开发流程</h3>
 						<span>观看课程</span>
 					</a>
 				</div>
 				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
-					<a href="#"><img src="${baseurl}/images/project-3.jpg" alt="对日软件测试技法" class="img-responsive">
+					<a href="/zhiku/training.tkm"><img src="${baseurl}/images/project-3.jpg" alt="对日软件测试技法" class="img-responsive">
 						<h3>对日软件测试技法</h3>
 						<span>观看课程</span>
 					</a>
 				</div>
 				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
-					<a href="#"><img src="${baseurl}/images/project-9.jpg" alt="对日软件编码规约" class="img-responsive">
+					<a href="/zhiku/training.tkm"><img src="${baseurl}/images/project-9.jpg" alt="对日软件编码规约" class="img-responsive">
 						<h3>对日软件编码规约</h3>
 						<span>观看课程</span>
 					</a>
 				</div>
 				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
-					<a href="#"><img src="${baseurl}/images/project-5.jpg" alt="VB.NET" class="img-responsive">
+					<a href="/zhiku/training.tkm"><img src="${baseurl}/images/project-5.jpg" alt="VB.NET" class="img-responsive">
 						<h3>VB.NET</h3>
 						<span>观看课程</span>
 					</a>
 				</div>
 				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
-					<a href="#"><img src="${baseurl}/images/project-6.jpg" alt="EXCEL VBA" class="img-responsive">
+					<a href="/zhiku/training.tkm"><img src="${baseurl}/images/project-6.jpg" alt="EXCEL VBA" class="img-responsive">
 						<h3>EXCEL VBA</h3>
 						<span>观看课程</span>
 					</a>

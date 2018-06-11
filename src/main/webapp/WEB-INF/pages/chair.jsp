@@ -6,7 +6,7 @@
 		<%@ include file="./layout/header.jsp"%>
 	</head>
 	<body>
-	<c:set var="index" scope="session" value="4"/>
+	<c:set var="index" scope="session" value="5"/>
 	<div class="fh5co-loader"></div>
 	
 	<div id="page">
@@ -19,8 +19,8 @@
 				<div class="col-md-8 col-md-offset-2 text-center">
 					<div class="display-t">
 						<div class="display-tc animate-box" data-animate-effect="fadeIn">
-							<h1>对日培训</h1>
-							<h2>对日软件服务外包产业，在工作的过程中，有着其独特的特点，和国内的大多数软件开发的流程上，有很大区别，需要专门的培训</h2>
+							<h1>培训讲座</h1>
+							<h2>线下培训讲座</h2>
 						</div>
 					</div>
 				</div>
@@ -82,7 +82,7 @@
 	<%@ include file="./layout/footerCommon.jsp"%>
 	<script>
         $(function () {
-            initPagination("/zhiku/training.tkm")
+            initPagination("/zhiku/chair.tkm")
         })
 	</script>
 	</body>

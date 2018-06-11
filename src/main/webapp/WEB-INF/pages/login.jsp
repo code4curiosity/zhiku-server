@@ -76,7 +76,7 @@
             dataType: 'json',
             success : function(result) {
                 layer.close(load);
-                if(result && result.code != 200){
+                if(result && result.code != 0){
                     layer.msg(result.message,function(){});
                     $('.password').val('');
                     return;

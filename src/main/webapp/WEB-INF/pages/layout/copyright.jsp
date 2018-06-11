@@ -1,21 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div id="fh5co-started" style="background-image:url(${baseurl}/images/img_bg_2.jpg);">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row animate-box">
-            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                <h2>开始免费学习</h2>
-                <p>不积跬步无以至千里，开始学习对日外包软件开发</p>
-            </div>
-        </div>
-        <div class="row animate-box">
-            <div class="col-md-8 col-md-offset-2 text-center">
-                <p><a href="/zhiku/ebook.tkm" class="btn btn-default btn-lg">开始免费学习</a></p>
-            </div>
-        </div>
-    </div>
-</div>
-
 <footer id="fh5co-footer" role="contentinfo">
     <div class="container">
         <div class="row row-pb-md">

@@ -1,0 +1,45 @@
+.fh5co-cover.fh5co-cover-sm {
+    height: 150px;
+}
+#fh5co-blog .container {
+    display: flex;
+    width: 80%!important;
+}
+.menu-box {
+    height: 100vh;
+    flex: 0 0 260px;
+    border-radius: 5px;
+    width: 260px;
+    overflow: hidden;
+    background: #ED5565;
+}
+
+#fh5co-blog .container .info-box {
+    min-height: 510px;
+    position: relative;
+    flex: 1;
+}
+
+.filterinput{
+    background-color:rgba(249, 244, 244, 0);
+    border-radius:15px;
+    width:90%;
+    height:30px;
+    border:thin solid #FFF;
+    text-indent:0.5em;
+    font-weight:bold;
+    color:#FFF;
+}
+#demo-list a{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;
+    white-space:nowrap;
+    width:100%;
+}
+#fh5co-blog {
+    padding: 0;
+}
+.info-box {
+    background: #fff;
+}

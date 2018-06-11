@@ -31,73 +31,29 @@
 	<div id="fh5co-pricing">
 		<div class="container">
 			<div class="row">
-				<div class="pricing">
-					<div class="col-md-3 animate-box">
-						<div class="price-box">
-							<h2 class="pricing-plan">权限管理</h2>
-							<ul class="classes">
-								<li>功能权限管理技术实现</li>
-								<li class="color">角色管理</li>
-								<li class="color">用户角色管理</li>
-								<li class="color">用户定义权限</li>
-								<li>数据级权限管理技术实现</li>
-								<li class="color">硬编码</li>
-								<li class="color">使用规则引擎</li>
-								<li class="color">使用第三方专业软件</li>
-							</ul>
-							<a href="#" class="btn btn-select-plan btn-sm">开始探索</a>
+				<c:forEach items="${page.list}" var="it">
+					<div class="col-lg-4 col-md-4">
+						<div class="fh5co-blog animate-box">
+							<a href="#" class="e-img-box"><img class="img-responsive" src="${baseurl}${it.imgPath != null ? it.imgPath: '/images/project-4.jpg'}" alt=""></a>
+							<div class="blog-text">
+								<h3><a href="/zhiku/info.tkm?categoryId=${it.id}&navIndex=2" target="_blank">${it.categoryLabel}</a></h3>
+								<span class="posted_on"><fmt:formatDate value="${it.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+								<span class="comment"><a href="">21<i class="icon-speech-bubble"></i></a></span>
+								<p>${it.description}</p>
+								<a href="/zhiku/info.tkm?categoryId=${it.id}&navIndex=2" target="_blank" class="btn btn-primary">开始阅读</a>
+							</div>
 						</div>
 					</div>
-
-					<div class="col-md-3 animate-box">
-						<div class="price-box popular">
-							<h2 class="pricing-plan pricing-plan-offer">事务管理</h2>
-							<ul class="classes">
-								<li>事务管理器</li>
-								<li>恢复管理器</li>
-								<li>锁管理器</li>
-								<li>死锁管理器</li>
-								<li>缓存管理器</li>
-							</ul>
-							<a href="#" class="btn btn-select-plan btn-sm">开始探索</a>
-						</div>
-					</div>
-
-					<div class="col-md-3 animate-box">
-						<div class="price-box">
-							<h2 class="pricing-plan">日志管理</h2>
-							<ul class="classes">
-								<li>存储状态管理</li>
-								<li>自动备份设置</li>
-								<li class="color">启用自动备份</li>
-								<li class="color">备份方式</li>
-								<li class="color">备份目录</li>
-								<li class="color">自动备份时间</li>
-								<li>导入备份数据</li>
-								<li class="color">记录类型</li>
-								<li class="color">“开始时间”和“结束时间”</li>
-								<li class="color">备份目录</li>
-								<li class="color"> 姓名（或者IP）</li>
-								<li>手动删除数据</li>
-								<li class="color">删除对象</li>
-								<li class="color">记录类型</li>
-								<li class="color">结束日期</li>
-							</ul>
-							<a href="#" class="btn btn-select-plan btn-sm">开始探索</a>
-						</div>
-					</div>
-
-					<div class="col-md-3 animate-box">
-						<div class="price-box popular">
-							<h2 class="pricing-plan pricing-plan-offer">排他管理</h2>
-							<ul class="classes">
-								<li>共享锁</li>
-								<li>排他锁</li>
-							</ul>
-							<a href="#" class="btn btn-select-plan btn-sm">开始探索</a>
-						</div>
-					</div>
-
+				</c:forEach>
+			</div>
+			<div class="pagination">
+				<div class="pg-content">
+					<span class="pg-item prev <c:if test="${!page.hasPreviousPage}">disabled</c:if>" data-value="${page.pageNum}">上一页</span>
+					<c:forEach var="i" begin="1" end="${page.pages}">
+						<span class="pg-item pg-no <c:if test="${i==page.pageNum}">active</c:if>" data-value="${i}">${i}</span>
+					</c:forEach>
+					<span class="pg-item next <c:if test="${!page.hasNextPage}">disabled</c:if>" data-value="${page.pageNum}">下一页</span>
+					<span class="pg-total">${page.pageNum} / ${page.pages}</span>
 				</div>
 			</div>
 		</div>
@@ -107,7 +63,11 @@
 	</div>
 
 	<%@ include file="./layout/footerCommon.jsp"%>
-
+	<script>
+        $(function () {
+            initPagination("/zhiku/professional.tkm")
+        })
+	</script>
 	</body>
 </html>
 

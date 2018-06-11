@@ -261,3 +261,17 @@
 
 
 }());
+function initPagination(url) {
+    $(".pagination .prev").click(function () {
+        var curNo = $(this).data("value")*1 - 1
+        window.location.href = url + "?pageNo="+ curNo
+    })
+    $(".pagination .next").click(function () {
+        var curNo = $(this).data("value")*1 + 1
+        window.location.href = url + "?pageNo="+ curNo
+    })
+    $(".pagination .pg-no").not(".active").click(function () {
+        var curNo = $(this).data("value")
+        window.location.href = url + "?pageNo="+ curNo
+    })
+}

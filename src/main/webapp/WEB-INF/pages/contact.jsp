@@ -6,7 +6,7 @@
 		<%@ include file="./layout/header.jsp"%>
 	</head>
 	<body>
-	<c:set var="index" scope="session" value="5"/>
+	<c:set var="index" scope="session" value="6"/>
 	<div class="fh5co-loader"></div>
 	
 	<div id="page">

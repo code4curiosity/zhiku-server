@@ -33,15 +33,39 @@
 			<div class="row">
 				<div class="col-lg-4 col-md-4">
 					<div class="fh5co-blog animate-box">
-						<a href="#"><img class="img-responsive" src="${baseurl}/images/project-4.jpg" alt=""></a>
+						<a href="#" class="e-img-box"><img class="img-responsive" src="${baseurl}/images/project-4.jpg" alt=""></a>
 						<div class="blog-text">
-							<h3><a href=""#>EXCEL VBA</a></h3>
-							<span class="posted_on">11/02</span>
+							<h3><a href="/ebook/catalogue.tkm" target="_blank">vba电子书</a></h3>
+							<span class="posted_on">2017-05-30 11:22:16</span>
 							<span class="comment"><a href="">21<i class="icon-speech-bubble"></i></a></span>
-							<p>在EXCEL中编程使用的编程语言</p>
-							<a href="#" class="btn btn-primary">开始阅读</a>
-						</div> 
+							<p>操作excel的编程语言</p>
+							<a href="/ebook/catalogue.tkm" target="_blank" class="btn btn-primary">开始阅读</a>
+						</div>
 					</div>
+				</div>
+				<c:forEach items="${page.list}" var="it">
+					<div class="col-lg-4 col-md-4">
+						<div class="fh5co-blog animate-box">
+							<a class="e-img-box" href="#"><img class="img-responsive" src="${baseurl}${it.imgPath != null ? it.imgPath: '/images/project-4.jpg'}" alt=""></a>
+							<div class="blog-text">
+								<h3><a href="/zhiku/info.tkm?categoryId=${it.id}&navIndex=3" target="_blank">${it.categoryLabel}</a></h3>
+								<span class="posted_on"><fmt:formatDate value="${it.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+								<span class="comment"><a href="">21<i class="icon-speech-bubble"></i></a></span>
+								<p>${it.description}</p>
+								<a href="/zhiku/info.tkm?categoryId=${it.id}&navIndex=3" target="_blank" class="btn btn-primary">开始阅读</a>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+			<div class="pagination">
+				<div class="pg-content">
+					<span class="pg-item prev <c:if test="${!page.hasPreviousPage}">disabled</c:if>" data-value="${page.pageNum}">上一页</span>
+					<c:forEach var="i" begin="1" end="${page.pages}">
+						<span class="pg-item pg-no <c:if test="${i==page.pageNum}">active</c:if>" data-value="${i}">${i}</span>
+					</c:forEach>
+					<span class="pg-item next <c:if test="${!page.hasNextPage}">disabled</c:if>" data-value="${page.pageNum}">下一页</span>
+					<span class="pg-total">${page.pageNum} / ${page.pages}</span>
 				</div>
 			</div>
 		</div>
@@ -51,7 +75,11 @@
 	</div>
 
 	<%@ include file="./layout/footerCommon.jsp"%>
-
+	<script>
+        $(function () {
+            initPagination("/zhiku/ebook.tkm")
+        })
+	</script>
 	</body>
 </html>
 
